@@ -19,3 +19,5 @@ T.ex EAST(1, 0) där man definerar namnet samt att den kommer röra sig åt "höger"
 
 Styrningen av denna sköts via keyboard-lyssnaren i GameController som endast reagerar på piltangenterna (via en switch-case). Denna sköts via en egen tråd.
 GameController kommer att kalla på gameUpdate som uppdaterar Collectorns position via metoden getNextCollectorPos, ändrar inte Collectorn sin position kommer den fortsätta i nuvarande riktning, annars ärndrar den riktning.
+
+6) I GameModel lagras spelbrŠdet i en instansvariabel som Šr en 2 dimentionell array utav typen GameTile. DŠr en position i brŠdet (exempelvis [1][1]) motsvarar en ruta i brŠdet.
