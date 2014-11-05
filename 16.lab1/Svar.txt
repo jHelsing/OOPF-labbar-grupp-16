@@ -10,4 +10,4 @@ Det är alltså RoundTile som sköter ritandet.
 3) Det är klassen GoldModel som sköter målandet av myntet då den kallar på RoundTile 
 (Kallar indirekt på målar-funktionen i RoundTile när den lägger till ett COIN_TILE)
 
-4)
+4) GameFactory kan man sŠga fungerar som en fabrik som utŒt visar vad den kan skapa. I detta fall kan den skapa spelet Gold. Fšr att lŠgga till funktionalitet fšr att fŒ med ett Snake game sŒ mŒste man lŠgga in: ÒSnakeÓ i getGameNames() return array samt en if-sats i createGame(final String gameName) som kollar ifall gameName Šr lika med ÒSnakeÓ och att den i sŒ fall returnerar ett nytt SnakeModel objekt.
