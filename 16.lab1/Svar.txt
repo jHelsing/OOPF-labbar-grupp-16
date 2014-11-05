@@ -11,3 +11,11 @@ Det är alltså RoundTile som sköter ritandet.
 (Kallar indirekt på målar-funktionen i RoundTile när den lägger till ett COIN_TILE)
 
 4) GameFactory kan man sŠga fungerar som en fabrik som utŒt visar vad den kan skapa. I detta fall kan den skapa spelet Gold. Fšr att lŠgga till funktionalitet fšr att fŒ med ett Snake game sŒ mŒste man lŠgga in: ÒSnakeÓ i getGameNames() return array samt en if-sats i createGame(final String gameName) som kollar ifall gameName Šr lika med ÒSnakeÓ och att den i sŒ fall returnerar ett nytt SnakeModel objekt.
+
+5) I detta spel heter entiteten som "äter guld" Collector, dennes rörelser sköts via metodena "updateDirection" och "getNextCollectorPos" Samt via tangentbordslyssnaren i klassen GameController.
+
+I spelet har man definerat en uppräkningstyp med namnet Direction, elementen i denna är riktningen för Collectorn.
+T.ex EAST(1, 0) där man definerar namnet samt att den kommer röra sig åt "höger" (x-vektorn är 1 och y-vektorn 0)
+
+Styrningen av denna sköts via keyboard-lyssnaren i GameController som endast reagerar på piltangenterna (via en switch-case). Denna sköts via en egen tråd.
+GameController kommer att kalla på gameUpdate som uppdaterar Collectorns position via metoden getNextCollectorPos, ändrar inte Collectorn sin position kommer den fortsätta i nuvarande riktning, annars ärndrar den riktning.
