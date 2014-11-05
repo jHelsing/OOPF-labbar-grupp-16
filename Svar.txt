@@ -1,0 +1,13 @@
+1) GameModel är en typ av "mall" för matrisbaserade spel. Klassen är en abstrakt klass, dvs. man kan inte skapa instanser av den.
+GameModel innehåller sedan abstrakta metoder som subklasserna skall implementera. GoldModel är en subklass av GameModel,
+och alltså ett matrisbaserat spel, denna implementerar de abstrakta metoderna i GameModel och därav kan man skapa instanser av denna klass.
+
+2) Den grafiska representation av mynt sköts via klassen "RoundTile" som helt enkelt skapar en fylld cirkel.
+Färgen myntet skall ha specifieras via konstruktorn, skulle du då eventuellt vilja ha ett rosa mynt är det enkelt att ordna. 
+Exempelvis görs detta när man skapar "Collector"-tilet.
+Det är alltså RoundTile som sköter ritandet.
+
+3) Det är klassen GoldModel som sköter målandet av myntet då den kallar på RoundTile 
+(Kallar indirekt på målar-funktionen i RoundTile när den lägger till ett COIN_TILE)
+
+4)
