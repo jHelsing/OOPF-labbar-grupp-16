@@ -1,0 +1,38 @@
+1) GameModel är en typ av "mall" för matrisbaserade spel. Klassen är en abstrakt klass, dvs. man kan inte skapa instanser av den.
+GameModel innehåller sedan abstrakta metoder som subklasserna skall implementera. GoldModel är en subklass av GameModel,
+och alltså ett matrisbaserat spel, denna implementerar de abstrakta metoderna i GameModel och därav kan man skapa instanser av denna klass.
+
+2) Den grafiska representation av mynt sköts via klassen "RoundTile" som helt enkelt skapar en fylld cirkel.
+Färgen myntet skall ha specifieras via konstruktorn, skulle du då eventuellt vilja ha ett rosa mynt är det enkelt att ordna. 
+Exempelvis görs detta när man skapar "Collector"-tilet.
+Det är alltså RoundTile som sköter ritandet.
+
+3) Det är klassen GoldModel som sköter målandet av myntet då den kallar på RoundTile 
+(Kallar indirekt på målar-funktionen i RoundTile när den lägger till ett COIN_TILE)
+
+4) GameFactory kan man sŠga fungerar som en fabrik som utŒt visar vad den kan skapa. I detta fall kan den skapa spelet Gold. Fšr att lŠgga till funktionalitet fšr att fŒ med ett Snake game sŒ mŒste man lŠgga in: ÒSnakeÓ i getGameNames() return array samt en if-sats i createGame(final String gameName) som kollar ifall gameName Šr lika med ÒSnakeÓ och att den i sŒ fall returnerar ett nytt SnakeModel objekt.
+
+5) I detta spel heter entiteten som "äter guld" Collector, dennes rörelser sköts via metodena "updateDirection" och "getNextCollectorPos" Samt via tangentbordslyssnaren i klassen GameController.
+
+I spelet har man definerat en uppräkningstyp med namnet Direction, elementen i denna är riktningen för Collectorn.
+T.ex EAST(1, 0) där man definerar namnet samt att den kommer röra sig åt "höger" (x-vektorn är 1 och y-vektorn 0)
+
+Styrningen av denna sköts via keyboard-lyssnaren i GameController som endast reagerar på piltangenterna (via en switch-case). Denna sköts via en egen tråd.
+GameController kommer att kalla på gameUpdate som uppdaterar Collectorns position via metoden getNextCollectorPos, ändrar inte Collectorn sin position kommer den fortsätta i nuvarande riktning, annars ärndrar den riktning.
+
+6) I GameModel lagras spelbrŠdet i en instansvariabel som Šr en 2 dimentionell array utav typen GameTile. DŠr en position i brŠdet (exempelvis [1][1]) motsvarar en ruta i brŠdet.
+
+7) Programmet startas via klassen Main. denna skapar först en JFrame, dvs. en top-level container som GUIn skall ligga i.
+Efter detta skapar den en instans av GUIView och ger den en ny GameFactory(Dvs en lista på tillgängliga spel och metod för att skapa dessa.) grafiken kommer ligga i denna instans då GUIView extendar JFrame
+GuiView skapas och i konstruktorn skapar den en instans av GameView (och ger den en storlek), GameView skapar och målar upp det rutnät som spelet kommer använda (GameView extendar JComponent och därav kan man hantera en som en vanlig komponent)
+Efter detta skapas en GameController som kommer sätta upp lite logik för om spelet körs, samt kommer starta lite trådar för tangentyssning(kommer använda en arraylist för att lagra en kö keyboard-tryckningar som skall exekveras) och andra trådar för spelstyrning.
+Efter detta kommer GUIView specificera lite data för hur föstret ska se ut(färger) och lägga ut knapp och JCombobox för val av spel.
+Efter detta kommer lyssnaren vänta på att användaren valt och startat spel (tryckt på knappen) då kommer lyssnaren skapa ett spel(via GameController) sedan stoppa eventuellt aktivt spel och starta detta nya spel, exekveringen sköts sedan via spelklassen paralellt med styrningen i GameController.
+
+8) Vi kommer skapa ett snake-spel. Till detta kommer vi återanvända mycket av det nuvarande programmet. Självklart kommer vi använda själva "skapa"-systemet för att starta spelet.
+Vi kommer även använda gamecontroller då konceptet med snake är snarlikt med guldspelet. Snake ska ju exempelvis röra sig hela tiden.
+Vi kommer även använda "myntmodellen" för att modellera snakes "mat" 
+
+Spelet skall skapa en orm som rör sig i specifierad riktining tills den träffar på en kant, sig själv, eller ett mynt. I det sistnämnda fallet förlängs snake med en ruta.
+Snake skall i detta fall istället vara uppbyggd av kvadrater istället för cirklar, så detta får vi skriva nytt. likaså måste vi skriva en uträningsmetod för hur snake kommer röra sig. 
+Annars kommer vi försöka använda så mycket av den nuvarande strukturen som möjligt. Är ju onödigt att uppfinna hjulet två gånger.
