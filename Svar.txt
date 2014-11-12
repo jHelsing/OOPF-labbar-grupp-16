@@ -10,7 +10,8 @@ Det är alltså RoundTile som sköter ritandet.
 3) Det är klassen GoldModel som sköter målandet av myntet då den kallar på RoundTile 
 (Kallar indirekt på målar-funktionen i RoundTile när den lägger till ett COIN_TILE)
 
-4) GameFactory kan man sŠga fungerar som en fabrik som utŒt visar vad den kan skapa. I detta fall kan den skapa spelet Gold. Fšr att lŠgga till funktionalitet fšr att fŒ med ett Snake game sŒ mŒste man lŠgga in: ÒSnakeÓ i getGameNames() return array samt en if-sats i createGame(final String gameName) som kollar ifall gameName Šr lika med ÒSnakeÓ och att den i sŒ fall returnerar ett nytt SnakeModel objekt.
+4) GameFactory kan man säga fungerar som en fabrik som visar och "skapar" tillgängiga spel. I detta fall kan den skapa spelet Gold. 
+För att lägga till funktionalitet för att få med ett Snake game så måste man lägga in: "Snake" i getGameNames() return array samt en if-sats i createGame(final String gameName) som kollar ifall gameName är lika med "Snake" och att den i så fall returnerar ett nytt SnakeModel objekt.
 
 5) I detta spel heter entiteten som "äter guld" Collector, dennes rörelser sköts via metodena "updateDirection" och "getNextCollectorPos" Samt via tangentbordslyssnaren i klassen GameController.
 
@@ -20,7 +21,7 @@ T.ex EAST(1, 0) där man definerar namnet samt att den kommer röra sig åt "höger"
 Styrningen av denna sköts via keyboard-lyssnaren i GameController som endast reagerar på piltangenterna (via en switch-case). Denna sköts via en egen tråd.
 GameController kommer att kalla på gameUpdate som uppdaterar Collectorns position via metoden getNextCollectorPos, ändrar inte Collectorn sin position kommer den fortsätta i nuvarande riktning, annars ärndrar den riktning.
 
-6) I GameModel lagras spelbrŠdet i en instansvariabel som Šr en 2 dimentionell array utav typen GameTile. DŠr en position i brŠdet (exempelvis [1][1]) motsvarar en ruta i brŠdet.
+6) I GameModel lagras spelbrädet i en instansvariabel som Šr en 2 dimentionell array utav typen GameTile. DŠr en position i brädet (exempelvis [1][1]) motsvarar en ruta i brädet.
 
 7) Programmet startas via klassen Main. denna skapar först en JFrame, dvs. en top-level container som GUIn skall ligga i.
 Efter detta skapar den en instans av GUIView och ger den en ny GameFactory(Dvs en lista på tillgängliga spel och metod för att skapa dessa.) grafiken kommer ligga i denna instans då GUIView extendar JFrame
