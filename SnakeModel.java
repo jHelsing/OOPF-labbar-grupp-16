@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 /**
  * A simple "Snake"-Game.
- * 
+ * @author Tobias Alldén
+ * @author Jonathan Helsing
  * <p>
  * 
  * An apple is placed on the board, the objective is to steer the snake into "consuming" the apple
@@ -61,17 +62,8 @@ public class SnakeModel extends GameModel {
 
 	/** The position of the apple */
 	private Position appleLocation;
-	/*
-	 * The declaration and object creation above uses the new language feature
-	 * 'generic types'. It can be declared in the old way like this:
-	 * private java.util.List coins = new ArrayList();
-	 * This will however result in a warning at compilation
-	 * "Position" in this case is the type of the objects that are going
-	 * to be used in the List
-	 */
 
 	/** Length of the snake */
-
 	private int snakeLength;
 
 	/** A list of the snake's positions in the board. */
@@ -137,7 +129,7 @@ public class SnakeModel extends GameModel {
 	}
 
 	/**
-	 * Update the direction of the collector
+	 * Update the direction of the snake
 	 * according to the user's keypress.
 	 */
 	private void updateDirection(final int key) {
@@ -187,15 +179,18 @@ public class SnakeModel extends GameModel {
 
 		// Erase the previous position.
 		setGameboardState(this.SnakePos.get(snakeLength-1), BLANK_TILE);
+		
+		//check if next tile is a snake tile.
+		if (isSnakeTile(getNextSnakePos())) {
+			throw new GameOverException(this.score);
+		}
 		// Change snake position.
 		SnakePos.add(0, getNextSnakePos());
 
 		if (isOutOfBounds(this.SnakePos.get(0))) {
 			throw new GameOverException(this.score);
 		}
-		if (isSnakeTile(getNextSnakePos())) {
-			throw new GameOverException(this.score);
-		}
+
 
 		// If the snakes head is at the same location as the apple, 
 		// the snake consumes the apple, becomes one joint longer and another apple is placed on the board.
@@ -212,8 +207,8 @@ public class SnakeModel extends GameModel {
 		}
 
 		// TODO add win-clause
-		if (this.score == 40) {
-			throw new GameOverException(this.score + 5);
+		if (this.score == 25) {
+			throw new GameOverException(this.score);
 		}
 
 
