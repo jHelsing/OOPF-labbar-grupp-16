@@ -4,15 +4,34 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * This class describes a circle with methods from the GeometricalForm interface.
+ * This class describes a circle with methods adapted to circles
+ * from the GeometricalForm interface.
  * 
- * @author Jonathan Helsing och Tobias Alldén
+ * @author Tobias Alldén
+ * @author Jonathan Helsing
  * @version 1.0
  */
 
 public class Circle implements GeometricalForm {
 	
-	private int x, y, diameter;
+	/**
+	 * The x-coordinate for the top left corner of the circle.
+	 */
+	private int x;
+	
+	/**
+	 * The y-coordinate for the top left corner of the circle.
+	 */
+	private int y;
+	
+	/**
+	 * The diameter of the circle.
+	 */
+	private int diameter;
+	
+	/**
+	 * The colour that the circle will be filled with when drawn on screen.
+	 */
 	private Color color;
 	
 	/**
@@ -24,10 +43,10 @@ public class Circle implements GeometricalForm {
 	 * @param c The colour of the circle
 	 * @throws IllegalPositionException Thrown if the x and y coordinates is less than 0 (Illegal)
 	 */
-	
 	public Circle(int x, int y, int diameter, Color c) throws IllegalPositionException {
 		if(x<=0 || y<=0) {
-			throw new IllegalPositionException();
+			throw new IllegalPositionException("Tried to construct a new Circle " + 
+					"with negative x and/or y coordinates");
 		}
 		this.x = x;
 		this.y = y;
@@ -42,7 +61,6 @@ public class Circle implements GeometricalForm {
 	 * @param diameter The diameter of the circle
 	 * @param c The colour of the circle
 	 */
-	
 	public Circle(GeometricalForm f, int diameter, Color c) {
 		x = f.getX();
 		y = f.getY();
@@ -53,7 +71,6 @@ public class Circle implements GeometricalForm {
 	/**
 	 * {@inheritDoc}
 	 */
-
 	@Override
 	public int compareTo(GeometricalForm o) {
 		if(this.getArea()<o.getArea()) {
@@ -63,7 +80,7 @@ public class Circle implements GeometricalForm {
 			return 1;
 		}
 		return 0;
-	}
+	}//end compareTo
 	
 	/**
 	 * {@inheritDoc}

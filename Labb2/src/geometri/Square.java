@@ -3,13 +3,49 @@ package geometri;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Square implements GeometricalForm {
+/**
+ * This class describes a square with methods adapted to squares
+ * from the GeometricalForm interface.
+ * 
+ * @author Tobias Alldén
+ * @author Jonathan Helsing
+ * @version 1.0
+ *
+ */
 
-	private int x, y, side;
+public class Square implements GeometricalForm {
+	
+	/**
+	 * The x-coordinate for the top left corner of the rectangle
+	 */
+	private int x;
+	
+	/**
+	 * The y-coordinate for the top left corner of the rectangle
+	 */
+	private int y;
+	
+	/**
+	 * The length of the side of the square
+	 */
+	private int side;
+	
+	/**
+	 * The colour that the square will be filled with
+	 */
 	private Color color;
 	
+	/**
+	 * Constructs a new Square object.
+	 * 
+	 * @param x The position of the square's top left corner on the x-axis.
+	 * @param y The position of the square's top left corner on the y-axis.
+	 * @param side The length of each of the square's sides.
+	 * @param c The colour of the square.
+	 * @throws IllegalPositionException Thrown if the x and y coordinates is less than 0 (Illegal).
+	 */
 	public Square(int x, int y, int side, Color c) throws IllegalPositionException {
-		if(x < 0 || y < 0) {
+		if(x <= 0 || y <= 0) {
 			throw new IllegalPositionException("Tried to construct a new Square " + 
 					"with negative x and/or y coordinates");
 		}
@@ -19,6 +55,13 @@ public class Square implements GeometricalForm {
 		color = c;
 	}
 	
+	/**
+	 * Constructs a new Square object.
+	 * 
+	 * @param f  A GeometricalForm that contains the x and y coordinates for the new rectangle object.
+	 * @param side The length of each of the square's sides.
+	 * @param c The colour of the square.
+	 */
 	public Square(GeometricalForm f, int side, Color c) {
 		this.x = f.getX();
 		this.y = f.getY();
@@ -26,11 +69,19 @@ public class Square implements GeometricalForm {
 		color = c;
 	}
 	
+	/**
+	 * Get the area of this square as rounded to the closest integer.
+	 * 
+	 * @return - The area of the square as rounded to the closest integer.
+	 */
 	@Override
 	public int getArea() {
 		return (int) Math.pow(this.side, 2);
 	}
-
+	
+	/**
+	 * {@inheirtDoc}
+	 */
 	@Override
 	public int compareTo(GeometricalForm f) {
 		if(this.getArea()<f.getArea()) {
@@ -40,61 +91,98 @@ public class Square implements GeometricalForm {
 			return 1;
 		}
 		return 0;
-	}
-
+	}//end compareTo
+	
+	/**
+	 * {@inheirtDoc}
+	 */
 	@Override
 	public void fill(Graphics g) {
 		g.fillRect(this.x, this.y, this.side, this.side);
 	}
-
+	
+	/**
+	 * Get the colour of this square.
+	 * 
+	 * @return The colour of this square.
+	 */
 	@Override
 	public Color getColor() {
 		return this.color;
 	}
-
+	
+	/**
+	 * Get the width of this square.
+	 * 
+	 * @return The width of this square.
+	 */
 	@Override
 	public int getWidth() {
 		return this.side;
 	}
 
+	/**
+	 * Get the height of this square.
+	 * 
+	 * @return The height of this square.
+	 */
 	@Override
 	public int getHeight() {
 		return this.side;
 	}
-
+	
+	/**
+	 * Get the x-coordinate of the top left corner for this square.
+	 * 
+	 * @return The x-coordinate of the top left corner for this square.
+	 */
 	@Override
 	public int getX() {
 		return this.x;
 	}
-
+	
+	/**
+	 * Get the y-coordinate of the top left corner of this square.
+	 * 
+	 * @return The y-coordinate of the top left corner of this square.
+	 */
 	@Override
 	public int getY() {
 		return this.y;
 	}
-
+	
+	/**
+	 * {@inheirtDoc}
+	 */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		if((x + dx) < 0 || (y + dy) < 0) {
+		if((x + dx) <= 0 || (y + dy) <= 0) {
 			throw new IllegalPositionException();
 		}
 		x = x+dx;
 		y = y+dy;
-		//TODO funkar?
 	}//end move
-
+	
+	/**
+	 * Get the perimeter for this square
+	 * 
+	 * @return - the perimeter of this square
+	 */
 	@Override
 	public int getPerimeter() {
-		return (int) Math.pow(this.side, 2);
+		return this.side*4;
 	}
-
+	
+	/**
+	 * {@inheirtDoc}
+	 */
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
-		if(x < 0 || y < 0) {
+		if(x <= 0 || y <= 0) {
 			throw new IllegalPositionException();
 		}
 		this.x = x;
 		this.y = y;
-		// TODO funkar?
 	}//end place
 	
-}
+}//end Oval
