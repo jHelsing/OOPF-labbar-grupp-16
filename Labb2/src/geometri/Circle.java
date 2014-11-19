@@ -3,13 +3,30 @@ package geometri;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * This class describes a circle with methods from the GeometricalForm interface.
+ * 
+ * @author Jonathan Helsing och Tobias Alldén
+ * @version 1.0
+ */
+
 public class Circle implements GeometricalForm {
 	
 	private int x, y, diameter;
 	private Color color;
 	
+	/**
+	 * Constructs a new Circle object.
+	 * 
+	 * @param x The position of the circle's top left corner on the x-axis
+	 * @param y The position of the circle's top left corner on the y-axis
+	 * @param diameter The diameter for the circle
+	 * @param c The colour of the circle
+	 * @throws IllegalPositionException Thrown if the x and y coordinates is less than 0 (Illegal)
+	 */
+	
 	public Circle(int x, int y, int diameter, Color c) throws IllegalPositionException {
-		if(x<0 || y<0) {
+		if(x<=0 || y<=0) {
 			throw new IllegalPositionException();
 		}
 		this.x = x;
@@ -18,12 +35,24 @@ public class Circle implements GeometricalForm {
 		this.color = c;
 	}
 	
+	/**
+	 * Constructs a new Circle object.
+	 * 
+	 * @param f a GeometricalForm that contains the x and y coordinates for the new circle object
+	 * @param diameter The diameter of the circle
+	 * @param c The colour of the circle
+	 */
+	
 	public Circle(GeometricalForm f, int diameter, Color c) {
 		x = f.getX();
 		y = f.getY();
 		this.diameter = diameter;
 		color = c;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 
 	@Override
 	public int compareTo(GeometricalForm o) {
@@ -35,65 +64,107 @@ public class Circle implements GeometricalForm {
 		}
 		return 0;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void fill(Graphics g) {
 		g.fillOval(this.x, this.y, this.diameter, this.diameter);
 	}
-
+	
+	/**
+	 * Get the colour of this circle
+	 * 
+	 * @return - The colour of this circle
+	 */
 	@Override
 	public Color getColor() {
 		return this.color;
 	}
-
+	
+	/**
+	 * Get the area of this circle as rounded to the closest integer.
+	 * 
+	 * @return - The area of the circle as rounded to the closest integer.
+	 */
 	@Override
 	public int getArea() {
 		return (int) (Math.PI*Math.pow(diameter/2, 2));
 	}
-
+	
+	/**
+	 * Get the height of this circle.
+	 * 
+	 * @return - The height of this circle
+	 */
 	@Override
 	public int getHeight() {
 		return this.diameter;
 	}
-
+	
+	/**
+	 * Get the perimeter for this circle
+	 * 
+	 * @return - the perimeter of this circle
+	 */
 	@Override
 	public int getPerimeter() {
-		return (int) Math.pow(this.getWidth(), 2);
+		return (int) (Math.PI*this.diameter);
 	}
-
+	
+	/**
+	 * Get the width of this Circle.
+	 * 
+	 * @return - The width of this circle
+	 */
 	@Override
 	public int getWidth() {
 		return this.diameter;
 	}
-
+	
+	/**
+	 * Get the x coordinate for this circle's top left corner
+	 * 
+	 * @return - the x coordinate for this circle's top left corner
+	 */
 	@Override
 	public int getX() {
 		return this.x;
 	}
-
+	
+	/**
+	 * Get the y coordinate for this circle's top left corner
+	 * 
+	 * @return - the y coordinate for this circle's top left corner
+	 */
 	@Override
 	public int getY() {
 		return this.y;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		if((x + dx) < 0 || (y + dy) < 0) {
+		if((x + dx) <= 0 || (y + dy) <= 0) {
 			throw new IllegalPositionException();
 		}
 		x = x+dx;
 		y = y+dy;
-		//TODO funkar?
 	}//end move
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
-		if(x < 0 || y < 0) {
+		if(x<=0 || y<=0) {
 			throw new IllegalPositionException();
 		}
 		this.x = x;
 		this.y = y;
-		// TODO funkar?
 	}//end place
 
 }//end Circle
