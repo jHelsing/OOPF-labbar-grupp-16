@@ -6,8 +6,7 @@ import java.awt.Graphics;
 /**
  * A graphical representation of a line.
  * 
- * 
- * @author Tobias Alldén
+ * @author Tobias Alldï¿½n
  * @author Jonathan Helsing
  */
 public class Line implements GeometricalForm{
