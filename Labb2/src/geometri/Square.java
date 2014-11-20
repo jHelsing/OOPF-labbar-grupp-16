@@ -15,24 +15,10 @@ import java.awt.Graphics;
 
 public class Square implements GeometricalForm {
 	
-	/**
-	 * The x-coordinate for the top left corner of the rectangle
+	/*
+	 * Instansvariabler
 	 */
-	private int x;
-	
-	/**
-	 * The y-coordinate for the top left corner of the rectangle
-	 */
-	private int y;
-	
-	/**
-	 * The length of the side of the square
-	 */
-	private int side;
-	
-	/**
-	 * The colour that the square will be filled with
-	 */
+	private int x, y, side;
 	private Color color;
 	
 	/**
@@ -98,7 +84,7 @@ public class Square implements GeometricalForm {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		g.fillRect(this.x, this.y, this.side, this.side);
+		g.fillRect(x, y, this.side, this.side);
 	}
 	
 	/**
@@ -157,7 +143,8 @@ public class Square implements GeometricalForm {
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
 		if((x + dx) <= 0 || (y + dy) <= 0) {
-			throw new IllegalPositionException();
+			throw new IllegalPositionException("Tried to move a square to " +
+					"an illeagl position");
 		}
 		x = x+dx;
 		y = y+dy;
@@ -179,7 +166,8 @@ public class Square implements GeometricalForm {
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
 		if(x <= 0 || y <= 0) {
-			throw new IllegalPositionException();
+			throw new IllegalPositionException("Tried to place a square on " +
+					"an illegal position");
 		}
 		this.x = x;
 		this.y = y;

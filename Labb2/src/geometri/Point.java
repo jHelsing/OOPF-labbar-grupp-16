@@ -13,19 +13,10 @@ import java.awt.Graphics;
  */
 public class Point implements GeometricalForm {
 	
-	/**
-	 * the x-coordinate of the point
+	/*
+	 * Instansvariabler
 	 */
-	private int x;
-	
-	/**
-	 * The y-coordinate of the point
-	 */
-	private int y;
-	
-	/**
-	 * The colour of the point
-	 */
+	private int x,y;
 	private Color color;
 	
 	/**
@@ -37,7 +28,13 @@ public class Point implements GeometricalForm {
 	 * @throws IllegalPositionException Thrown if the x- and y-coordinates is less than 0 (Illegal)
 	 */
 	public Point(int x, int y, Color c) throws IllegalPositionException {
-		
+		if(x <= 0 || y <= 0) {
+			throw new IllegalPositionException("Tried to construct a new point at "
+					+ "an illegal position");
+		}
+		this.x = x;
+		this.y = y;
+		color = c;
 	}
 	
 	/**
@@ -47,7 +44,9 @@ public class Point implements GeometricalForm {
 	 * @param c The colour of the point
 	 */
 	public Point(GeometricalForm f, Color c) {
-		
+		this.x = f.getX();
+		this.y = f.getY();
+		color = c;
 	}
 	
 	/**
@@ -57,7 +56,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public int getArea() {
-		// TODO Auto-generated method stub
+		//TODO Point Area
 		return 0;
 	}
 	
@@ -66,7 +65,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public int compareTo(GeometricalForm f) {
-		// TODO Auto-generated method stub
+		// TODO Point compareTo
 		return 0;
 	}//end compareTo
 	
@@ -75,7 +74,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
+		// TODO Point fill
 		
 	}
 	
@@ -86,8 +85,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.color;
 	}
 	
 	/**
@@ -97,7 +95,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
+		// TODO Point width
 		return 0;
 	}
 	
@@ -108,7 +106,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
+		// TODO Point height
 		return 0;
 	}
 	
@@ -119,8 +117,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.x;
 	}
 	
 	/**
@@ -130,8 +127,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.y;
 	}
 	
 	/**
@@ -139,8 +135,12 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		// TODO Auto-generated method stub
-		
+		if((x + dx) <= 0 || (y + dy) <= 0) {
+			throw new IllegalPositionException("Tried to move a point to " +
+					"an illegal position");
+		}
+		x = x+dx;
+		y = y+dy;
 	}//end move
 	
 	/**
@@ -150,7 +150,7 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public int getPerimeter() {
-		// TODO Auto-generated method stub
+		// TODO Point getPerimeter
 		return 0;
 	}
 	
@@ -159,8 +159,12 @@ public class Point implements GeometricalForm {
 	 */
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
-		// TODO Auto-generated method stub
-		
+		if(x<=0 || y<=0) {
+			throw new IllegalPositionException("Tried to place a point on " +
+					"an illegal position");
+		}
+		this.x = x;
+		this.y = y;
 	}//end move
 
 }//end point

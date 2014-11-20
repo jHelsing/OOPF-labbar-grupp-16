@@ -14,24 +14,10 @@ import java.awt.Graphics;
 
 public class Circle implements GeometricalForm {
 	
-	/**
-	 * The x-coordinate for the top left corner of the circle.
+	/*
+	 * Instansvariabler
 	 */
-	private int x;
-	
-	/**
-	 * The y-coordinate for the top left corner of the circle.
-	 */
-	private int y;
-	
-	/**
-	 * The diameter of the circle.
-	 */
-	private int diameter;
-	
-	/**
-	 * The colour that the circle will be filled with when drawn on screen.
-	 */
+	private int x, y, diameter;
 	private Color color;
 	
 	/**
@@ -166,7 +152,8 @@ public class Circle implements GeometricalForm {
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
 		if((x + dx) <= 0 || (y + dy) <= 0) {
-			throw new IllegalPositionException();
+			throw new IllegalPositionException("Tried to move a circle to " +
+					"an illegal position");
 		}
 		x = x+dx;
 		y = y+dy;
@@ -178,7 +165,8 @@ public class Circle implements GeometricalForm {
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
 		if(x<=0 || y<=0) {
-			throw new IllegalPositionException();
+			throw new IllegalPositionException("Tried to place a cricle on " +
+					"an illegal position");
 		}
 		this.x = x;
 		this.y = y;

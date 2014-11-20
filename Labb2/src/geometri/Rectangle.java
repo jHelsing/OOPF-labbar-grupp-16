@@ -15,29 +15,10 @@ import java.awt.Graphics;
 
 public class Rectangle implements GeometricalForm {
 	
-	/**
-	 * The x-coordinate for the top left corner of the rectangle
+	/*
+	 * Instansvariabler
 	 */
-	private int x;
-	
-	/**
-	 * The y-coordinate for the top left corner of the rectangle
-	 */
-	private int y;
-	
-	/**
-	 * The width of the rectangle
-	 */
-	private int width;
-	
-	/**
-	 * The height of the rectangle
-	 */
-	private int height;
-	
-	/**
-	 * The colour of the rectangle
-	 */
+	private int x, y, width, height;
 	private Color color;
 	
 	/**
@@ -107,7 +88,7 @@ public class Rectangle implements GeometricalForm {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		g.fillRect(this.x, this.y, this.width, this.height);
+		g.fillRect(x, y, width, height);
 	}
 	
 	/**
@@ -191,7 +172,7 @@ public class Rectangle implements GeometricalForm {
 	 */
 	@Override
 	public int getPerimeter() {
-		return (this.height*2) + (this.width*2);
+		return this.height*2 + this.width*2;
 	}
 
 }//end Rectangle

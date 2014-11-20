@@ -14,29 +14,10 @@ import java.awt.Graphics;
  */
 public class Oval implements GeometricalForm {
 	
-	/**
-	 * The position of the top left corner for this oval on the x-axis
+	/*
+	 * Instansvariabler
 	 */
-	private int x;
-	
-	/**
-	 * The position of the top left corning for this oval on the y-axis
-	 */
-	private int y;
-	
-	/**
-	 * The width of this oval
-	 */
-	private int width;
-	
-	/**
-	 * The height of this oval
-	 */
-	private int height;
-	
-	/**
-	 * The fill colour of this oval
-	 */
+	private int x, y, width, height;
 	private Color color;
 	
 	/**
@@ -172,7 +153,8 @@ public class Oval implements GeometricalForm {
 	 */
 	public void move(int dx, int dy) throws IllegalPositionException {
 		if((x + dx) <= 0 || (y + dy) <= 0) {
-			throw new IllegalPositionException();
+			throw new IllegalPositionException("Tried to move a oval to " +
+					"an illegal position");
 		}
 		x = x+dx;
 		y = y+dy;
@@ -184,7 +166,7 @@ public class Oval implements GeometricalForm {
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
 		if(x <= 0 || y <= 0) {
-			throw new IllegalPositionException();
+			throw new IllegalPositionException("Tried to place a oval at an illegal position");
 		}
 		this.x = x;
 		this.y = y;
