@@ -13,7 +13,7 @@ import java.awt.Graphics;
  *
  */
 
-public class Rectangle implements GeometricalForm {
+public class Rectangle extends AbstractGeometricalForm {
 	
 	/*
 	 * Instansvariabler
@@ -32,15 +32,7 @@ public class Rectangle implements GeometricalForm {
 	 * @throws IllegalPositionException Thrown if the x and y coordinates is less than 0 (Illegal).
 	 */
 	public Rectangle(int x, int y, int width, int height, Color c) throws IllegalPositionException {
-		if(x <= 0 || y <= 0) {
-			throw new IllegalPositionException("Tried to construct a new Rectangle " + 
-					"with negative x and/or y coordinates");
-		}
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		color = c;
+		super(x, y, width, height, c);
 	}
 	
 	/**
@@ -52,11 +44,7 @@ public class Rectangle implements GeometricalForm {
 	 * @param c The colour of the rectangle.
 	 */
 	public Rectangle(GeometricalForm f, int width, int height, Color c) {
-		this.x = f.getX();
-		this.y = f.getY();
-		this.width = width;
-		this.height = height;
-		color = c;
+		super(f, width, height, c);
 	}
 	
 	/**
@@ -73,97 +61,9 @@ public class Rectangle implements GeometricalForm {
 	 * {@inheirtDoc}
 	 */
 	@Override
-	public int compareTo(GeometricalForm f) {
-		if(this.getArea()<f.getArea()) {
-			return -1;
-		}
-		if(this.getArea()>f.getArea()) {
-			return 1;
-		}
-		return 0;
-	}//end compareTo
-	
-	/**
-	 * {@inheirtDoc}
-	 */
-	@Override
 	public void fill(Graphics g) {
 		g.fillRect(x, y, width, height);
 	}
-	
-	/**
-	 * Get the colour of this rectangle.
-	 * 
-	 * @return The colour of this rectangle.
-	 */
-	@Override
-	public Color getColor() {
-		return this.color;
-	}
-	
-	/**
-	 * Get the width of this rectangle.
-	 * 
-	 * @return The width of this rectangle.
-	 */
-	@Override
-	public int getWidth() {
-		return this.width;
-	}
-	
-	/**
-	 * Get the height of this rectangle.
-	 * 
-	 * @return The height of this rectangle.
-	 */
-	@Override
-	public int getHeight() {
-		return this.height;
-	}
-	
-	/**
-	 * Get the x-coordinate of the top left corner for this rectangle.
-	 * 
-	 * @return The x-coordinate of the top left corner for this rectangle.
-	 */
-	@Override
-	public int getX() {
-		return this.x;
-	}
-	
-	/**
-	 * Get the y-coordinate of the top left corner of this rectangle.
-	 * 
-	 * @return The y-coordinate of the top left corner of this rectangle.
-	 */
-	@Override
-	public int getY() {
-		return this.y;
-	}
-	
-	/**
-	 * {@inheirtDoc}
-	 */
-	@Override
-	public void move(int dx, int dy) throws IllegalPositionException {
-		if((x + dx) <= 0 || (y + dy) <= 0) {
-			throw new IllegalPositionException();
-		}
-		x = x+dx;
-		y = y+dy;
-	}//end move
-	
-	/**
-	 * {@inheirtDoc}
-	 */
-	@Override
-	public void place(int x, int y) throws IllegalPositionException {
-		if(x <= 0 || y <= 0) {
-			throw new IllegalPositionException();
-		}
-		this.x = x;
-		this.y = y;
-	}//end place
 	
 	/**
 	 * Get the perimeter for this rectangle
