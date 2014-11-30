@@ -54,7 +54,7 @@ public class Rectangle extends AbstractGeometricalForm {
 	 */
 	@Override
 	public int getArea() {
-		return this.height*this.width;
+		return height*width;
 	}
 	
 	/**
@@ -73,6 +73,12 @@ public class Rectangle extends AbstractGeometricalForm {
 	@Override
 	public int getPerimeter() {
 		return this.height*2 + this.width*2;
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }//end Rectangle
