@@ -5,21 +5,15 @@ import java.awt.Graphics;
 
 /**
  * This class describes a rectangle with methods adapted to rectangles
- * from the GeometricalForm interface.
+ * from the AbstractGeometricalForm class.
  * 
- * @author Tobias Alldén
+ * @author Tobias Allden
  * @author Jonathan Helsing
- * @version 1.0
+ * @version 1.5
  *
  */
 
 public class Rectangle extends AbstractGeometricalForm {
-	
-	/*
-	 * Instansvariabler
-	 */
-	private int x, y, width, height;
-	private Color color;
 	
 	/**
 	 * Constructs a new Rectangle object.
@@ -46,15 +40,12 @@ public class Rectangle extends AbstractGeometricalForm {
 	public Rectangle(GeometricalForm f, int width, int height, Color c) {
 		super(f, width, height, c);
 	}
-	
 	/**
-	 * Get the area of this rectangle as rounded to the closest integer.
-	 * 
-	 * @return - The area of the rectangle as rounded to the closest integer.
+	 * {@inheirtDoc}
 	 */
 	@Override
 	public int getArea() {
-		return height*width;
+		return getHeight()*getWidth();
 	}
 	
 	/**
@@ -62,22 +53,23 @@ public class Rectangle extends AbstractGeometricalForm {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		g.fillRect(x, y, width, height);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
 	/**
-	 * Get the perimeter for this rectangle
-	 * 
-	 * @return - the perimeter of this rectangle
+	 * A getter for the perimeter for a rectangle
+	 * @return The perimeter of this rectangle
 	 */
 	@Override
 	public int getPerimeter() {
-		return this.height*2 + this.width*2;
+		return 2*getWidth() + 2*getHeight();
 	}
-
+	
+	/**
+	 * {@ineheirtDoc}
+	 */
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

@@ -69,7 +69,12 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 	 */
 	@Override
 	public int compareTo(GeometricalForm f) {
-		// TODO Auto-generated method stub
+		if(getArea()<f.getArea()) {
+			return -1;
+		}
+		if(getArea()>f.getArea()) {
+			return 1;
+		}
 		return 0;
 	}
 	
@@ -129,8 +134,12 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 	 */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		// TODO Auto-generated method stub
-		
+		if((x + dx) <= 0 || (y + dy) <= 0) {
+			throw new IllegalPositionException("Tried to move a square to " +
+					"an illeagl position");
+		}
+		x = x+dx;
+		y = y+dy;
 	}
 	
 	/**
