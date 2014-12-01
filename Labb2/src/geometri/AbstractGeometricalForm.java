@@ -135,7 +135,7 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
 		if((x + dx) <= 0 || (y + dy) <= 0) {
-			throw new IllegalPositionException("Tried to move a square to " +
+			throw new IllegalPositionException("Tried to move to " +
 					"an illeagl position");
 		}
 		x = x+dx;
@@ -162,17 +162,42 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 	}
 	
 	/**
-	 * {@inheirtDoc}
+	 * {@inheritDoc}
 	 */
 	@Override
-	public abstract int hashCode();
-	
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((c == null) ? 0 : c.hashCode());
+		result = prime * result + height;
+		result = prime * result + width;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
 	/**
-	 * {@inheirtDoc}
+	 * 
+	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean equals(Object o) {
-		return false;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AbstractGeometricalForm other = (AbstractGeometricalForm) obj;
+		if (c == null) {
+			if (other.c != null)
+				return false;
+		} else if (!c.equals(other.c))
+			return false;
+		if (height != other.height)
+			return false;
+		if (width != other.width)
+			return false;
+		return true;
 	}
 
 }

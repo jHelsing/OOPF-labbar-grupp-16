@@ -68,10 +68,10 @@ public class Line extends AbstractGeometricalForm{
 	public void fill(Graphics g) {
 		g.setColor(this.getColor());
 		if(this.slope == Slope.UPWARDS) {
-			g.drawLine(this.getX(), this.getY(), this.getX()+getWidth(), this.getY()+this.getHeight());
+			g.drawLine(this.getX(), this.getY(), this.getX()+getWidth(), this.getY()-this.getHeight());
 		}
 		else if (this.slope == Slope.DOWNWARDS) {
-			g.drawLine(this.getX(), this.getY(), this.getX()+getWidth(), this.getY()-this.getHeight());
+			g.drawLine(this.getX(), this.getY(), this.getX()+getWidth(), this.getY()+this.getHeight());
 		}
 		
 		
@@ -91,7 +91,7 @@ public class Line extends AbstractGeometricalForm{
 		}
 		if(o instanceof Line) {
 			Line tmp = (Line)o;
-			if (this.getPerimeter() == tmp.getPerimeter() && this.getSlope() == tmp.getSlope()) {
+			if (this.equals(o)) {
 				return 0;
 			} else if(this.getPerimeter()< tmp.getPerimeter() && this.getSlope() != tmp.getSlope()) {
 				return -1;
@@ -165,18 +165,30 @@ public class Line extends AbstractGeometricalForm{
 		
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 * Also compares the slope and the peremeter of the line.
+	 */
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		if(super.equals(o) && o instanceof Line) {
+			if(((Line) o).getPerimeter() == this.getPerimeter() && this.getSlope() == ((Line) o).getSlope() ) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 
 	
