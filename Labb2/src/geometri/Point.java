@@ -50,7 +50,8 @@ public class Point extends AbstractGeometricalForm {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		
+		g.setColor(getColor());
+		g.fillOval(getX(), getY(), 2, 2);
 	}
 	
 	/**

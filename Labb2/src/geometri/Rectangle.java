@@ -53,6 +53,7 @@ public class Rectangle extends AbstractGeometricalForm {
 	 */
 	@Override
 	public void fill(Graphics g) {
+		g.setColor(getColor());
 		g.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
