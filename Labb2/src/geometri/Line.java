@@ -9,14 +9,9 @@ import java.awt.Graphics;
  * @author Tobias Alld�n
  * @author Jonathan Helsing
  */
-public class Line implements GeometricalForm{
+public class Line extends AbstractGeometricalForm{
 	//Instance Variables
-	private int x1;
-	private int x2;
-	private int y1;
-	private int y2;
-	private Slope slope;	
-	private Color color;
+	private Slope slope;
 	//An enum representing the slope of the line
 	public enum Slope {
 		UPWARDS(),
@@ -39,19 +34,13 @@ public class Line implements GeometricalForm{
 	 * 	
 	 */
 	public Line(int x1, int y1, int x2, int y2, Color c) throws IllegalPositionException {
-		if((x1 < 0 || x2 <0) || (y1 <0 || y2<0)  ) {
-			throw new IllegalPositionException();
-		}
-		this.x1 = x1;
-		this.x2 = x2;
-		this.y1 = y1;
-		this.y2 = y2;
-		this.color = c;	
-		if(this.y1 < this.y2) {
-			this.slope = Slope.DOWNWARDS;
+		super(x1,y1,(x2-x1),(y2-y1),c);
+		if(y2 > y1) {
+			this.slope = Slope.UPWARDS; 
 		} else {
-			this.slope = Slope.UPWARDS;
+			this.slope = Slope.DOWNWARDS;
 		}
+		
 	}
 	
 	
@@ -63,7 +52,12 @@ public class Line implements GeometricalForm{
 	 *  Creates a line using two other GeometricalForms
 	 */
 	public Line(GeometricalForm f1, GeometricalForm f2, Color c) {
-		
+		super(f1,(f2.getX() - f1.getX()),(f2.getY()-f1.getY()),c);
+		if(f2.getY() > f1.getY()) {
+			this.slope = Slope.UPWARDS;
+		} else {
+			this.slope = Slope.UPWARDS;
+		}
 		
 	   }
 
@@ -72,8 +66,14 @@ public class Line implements GeometricalForm{
 	 */
 	@Override
 	public void fill(Graphics g) {
-		g.setColor(color);
-		g.drawLine(x1, y1, x2, y2);
+		g.setColor(this.getColor());
+		if(this.slope == Slope.UPWARDS) {
+			g.drawLine(this.getX(), this.getY(), this.getX()+getWidth(), this.getY()+this.getHeight());
+		}
+		else if (this.slope == Slope.DOWNWARDS) {
+			g.drawLine(this.getX(), this.getY(), this.getX()+getWidth(), this.getY()-this.getHeight());
+		}
+		
 		
 	}
 
@@ -91,24 +91,23 @@ public class Line implements GeometricalForm{
 		}
 		if(o instanceof Line) {
 			Line tmp = (Line)o;
-			if (tmp.getX() == this.getX() && this.getY() == tmp.getY() 
-					&& this.getPerimeter() == tmp.getPerimeter() && this.getSlope() == tmp.getSlope()) {
+			if (this.getPerimeter() == tmp.getPerimeter() && this.getSlope() == tmp.getSlope()) {
 				return 0;
-			} else {
+			} else if(this.getPerimeter()< tmp.getPerimeter() && this.getSlope() != tmp.getSlope()) {
 				return -1;
+			}
+			else if(this.getPerimeter() > tmp.getPerimeter() && this.getSlope() != tmp.getSlope()) {
+				return 1;
+			}
+			else{
+				return 0;
 			}
 		} else {
 			return -1;
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Color getColor() {
-		return this.color;
-	}
+
 
 	/**
 	 * {@inheritDoc}
@@ -118,64 +117,23 @@ public class Line implements GeometricalForm{
 		return 0;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getHeight() {
-		if(y1 < y2) {
-			return this.y2 - this.y1;
-		} else {
-			return this. y1 - this.y2; 			
-		}
-	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	public int getPerimeter() {
 		double tmpX;//Temporary variable for difference of the x - coordinates
 		double tmpY; //Temporary variable for difference of the y- coordinates
-		if(this.x1 < this.x2) {
-			tmpX = Math.pow((x2-x1),2); 
+		if(this.slope == Slope.DOWNWARDS) {
+			tmpX = (this.getX() + this.getWidth());
+			tmpY = (this.getY() + this.getHeight());
 		} else {
-			tmpX = Math.pow(this.x2 - this.x1,2);
+			tmpX = (this.getX() + this.getWidth());
+			tmpY = (this.getY() - this.getHeight());			
 		}
-		if(y1 < y2) {
-			tmpY = Math.pow(y2-y1,2);
-		} else {
-			tmpY = Math.pow(y1-y2,2);
-		}		
-		//return the diagonal line
-		return (int)Math.sqrt(tmpY+tmpX);
+		return (int)Math.sqrt((Math.pow(tmpX, 2) + Math.pow(tmpY, 2)));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getWidth() {
-		double tmpPeremeter = Math.pow(this.getPerimeter(),2);
-		double tmpHeight = Math.pow(this.getHeight(),2);
-		return (int)Math.sqrt(tmpPeremeter-tmpHeight);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getX() {
-		return this.x1;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getY() {
-		return this.y1;
-	}
 	
 	/**
 	 * 
@@ -195,15 +153,7 @@ public class Line implements GeometricalForm{
 	 */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		if(this.x1 + dx < 0 || this.x2 + dx <0 
-				|| this.y1 + dy <0 || this.y2 +dy <0) {
-			throw new IllegalPositionException();
-		}		
-		this.x1 += dx;
-		this.x2 += dx;
-		this.y1 += dy;
-		this.y2 += dy;
-		
+		super.move(dx, dy);
 	}
 
 	/**
@@ -211,14 +161,22 @@ public class Line implements GeometricalForm{
 	 */
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
-		if((x1 < 0 || y <0)) {
-			throw new IllegalPositionException();
-		}
-		this.x2 = x1 + x;
-		this.x1 = x;
-		this.y2 = y1 + y;
-		this.y1 = y;
+		super.place(x, y);
 		
+	}
+
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	
