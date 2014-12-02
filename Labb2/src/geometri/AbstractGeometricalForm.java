@@ -176,18 +176,17 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 		return result;
 	}
 	/**
-	 * 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(Object o) {
+		if (this == o)
 			return true;
-		if (obj == null)
+		if (o == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (getClass() != o.getClass())
 			return false;
-		AbstractGeometricalForm other = (AbstractGeometricalForm) obj;
+		AbstractGeometricalForm other = (AbstractGeometricalForm) o;
 		if (c == null) {
 			if (other.c != null)
 				return false;

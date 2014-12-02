@@ -67,9 +67,15 @@ public class Point extends AbstractGeometricalForm {
 	/**
 	 * {@inheirtDoc}
 	 */
-	@Override
 	public int hashCode() {
-		return 0;
+		final int prime = 22;
+		int res = 1;
+		res = prime * res + ((this.getColor() == null) ? 0 : this.getColor().hashCode());
+		res = prime * res + this.getHeight();
+		res = prime * res + this.getWidth();
+		res = prime * res + this.getX();
+		res = prime * res + this.getY();
+		return res;
 	}
 
 }//end point
