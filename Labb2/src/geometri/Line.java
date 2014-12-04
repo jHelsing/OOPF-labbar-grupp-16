@@ -165,14 +165,17 @@ public class Line extends AbstractGeometricalForm{
 		
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+/**
+ * {@inheritDoc}
+ */
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
-		return 0;
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((slope == null) ? 0 : slope.hashCode());
+		return result;
 	}
+
 
 	/**
 	 * {@inheritDoc}
@@ -190,6 +193,7 @@ public class Line extends AbstractGeometricalForm{
 			return false;
 		}
 	}
+
 
 	
 	
