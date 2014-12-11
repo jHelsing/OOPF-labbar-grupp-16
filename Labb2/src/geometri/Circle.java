@@ -71,13 +71,11 @@ public class Circle extends AbstractGeometricalForm {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 42;
+		final int prime = 11;
 		int res = 1;
 		res = prime * res + ((this.getColor() == null) ? 0 : this.getColor().hashCode());
 		res = prime * res + this.getHeight();
 		res = prime * res + this.getWidth();
-		res = prime * res + this.getX();
-		res = prime * res + this.getY();
 		return res;
 	}
 

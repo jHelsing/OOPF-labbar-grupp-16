@@ -27,6 +27,7 @@ public class Rectangle extends AbstractGeometricalForm {
 	 */
 	public Rectangle(int x, int y, int width, int height, Color c) throws IllegalPositionException {
 		super(x, y, width, height, c);
+		super.place(x, y);
 	}
 	
 	/**
@@ -71,13 +72,11 @@ public class Rectangle extends AbstractGeometricalForm {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 38;
+		final int prime = 29;
 		int res = 1;
 		res = prime * res + ((this.getColor() == null) ? 0 : this.getColor().hashCode());
 		res = prime * res + this.getHeight();
 		res = prime * res + this.getWidth();
-		res = prime * res + this.getX();
-		res = prime * res + this.getY();
 		return res;
 	}
 

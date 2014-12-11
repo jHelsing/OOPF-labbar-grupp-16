@@ -14,7 +14,7 @@ import java.awt.Graphics;
  */
 public abstract class AbstractGeometricalForm implements GeometricalForm {
 	
-	private int x, y, width, height;
+	protected int x, y, width, height;
 	private Color c;
 	
 	/**
@@ -30,7 +30,7 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 	 */
 	public AbstractGeometricalForm(int x, int y, int width, int height, Color c)
 				throws IllegalPositionException {
-		if(x <= 0 || y <= 0) {
+		if(x < 0 || y < 0) {
 			throw new IllegalPositionException("Tried to construct a new form " + 
 					"with negative x and/or y coordinates");
 		}
@@ -69,13 +69,10 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 	 */
 	@Override
 	public int compareTo(GeometricalForm f) {
-		if(getArea()<f.getArea()) {
-			return -1;
+		if(getArea()==f.getArea()) {
+			return this.getPerimeter() - f.getPerimeter();
 		}
-		if(getArea()>f.getArea()) {
-			return 1;
-		}
-		return 0;
+		return this.getArea()-f.getArea();
 	}
 	
 	/**
@@ -134,12 +131,12 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 	 */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		if((x + dx) <= 0 || (y + dy) <= 0) {
+		if((x + dx) < 0 || (y + dy) < 0) {
 			throw new IllegalPositionException("Tried to move to " +
-					"an illeagl position");
+					"an illegal position");
 		}
-		x = x+dx;
-		y = y+dy;
+		x += dx;
+		y += dy;
 	}
 	
 	/**
@@ -154,7 +151,7 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 	 */
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
-		if(x <= 0 || y <= 0) {
+		if(x < 0 || y < 0) {
 			throw new IllegalPositionException();
 		}
 		this.x = x;
@@ -171,8 +168,6 @@ public abstract class AbstractGeometricalForm implements GeometricalForm {
 		result = prime * result + ((c == null) ? 0 : c.hashCode());
 		result = prime * result + height;
 		result = prime * result + width;
-		result = prime * result + x;
-		result = prime * result + y;
 		return result;
 	}
 	/**

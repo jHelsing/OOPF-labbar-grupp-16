@@ -78,8 +78,6 @@ public class Oval extends AbstractGeometricalForm {
 		res = prime * res + ((this.getColor() == null) ? 0 : this.getColor().hashCode());
 		res = prime * res + this.getHeight();
 		res = prime * res + this.getWidth();
-		res = prime * res + this.getX();
-		res = prime * res + this.getY();
 		return res;
 	}
 	
