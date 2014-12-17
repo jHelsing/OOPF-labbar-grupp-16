@@ -173,7 +173,6 @@ public class ReversiModel implements GameModel {
 			}
 			if (canTurn(this.turn, this.cursorPos)) {
 				turnOver(this.turn, this.cursorPos);
-				//this.gameboardState[this.cursorPos.getX()][this.cursorPos.getY()] = t;
 				this.board[this.cursorPos.getX()][this.cursorPos.getY()] =
 						(this.turn == Turn.BLACK
 								? PieceColor.BLACK
