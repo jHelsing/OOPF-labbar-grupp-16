@@ -125,13 +125,13 @@ public class GameController implements Runnable {
 		// Setting isRunning to false will
 		// make the thread stop (see run())
 		this.isRunning = false;
-
+		
 		// Unset the game model...
 		this.view.setModel(null);
 
 		// Stop listening for events
 		this.view.removeKeyListener(this.keyListener);
-
+		
 		// Make sure we wait until the thread has stopped...
 		if (this.gameThread != null) {
 			while (this.gameThread.isAlive()) {
@@ -159,7 +159,7 @@ public class GameController implements Runnable {
 				this.view.repaint();
 				
 				if(this.gameModel.getUpdateSpeed() <= 0) {
-					Thread.sleep(Integer.MAX_VALUE);
+					Thread.sleep(1000);
 				} else {
 					Thread.sleep(this.gameModel.getUpdateSpeed());
 				}
