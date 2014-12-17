@@ -1,4 +1,4 @@
-/GameModel.class
+/BlankTile.class
 /CompositeTile.class
 /Constants.class
 /CrossTile.class
@@ -7,8 +7,10 @@
 /GameController$1.class
 /GameController.class
 /GameFactory.class
+/GameModel.class
 /GameOverException.class
 /GameTile.class
+/GameUtils.class
 /GameView.class
 /GoldModel$Directions.class
 /GoldModel.class
@@ -16,14 +18,11 @@
 /Main.class
 /Position.class
 /RectangularTile.class
+/ReversiFactory.class
 /ReversiModel$Direction.class
 /ReversiModel$PieceColor.class
 /ReversiModel$Turn.class
 /ReversiModel.class
 /RoundTile.class
 /SquareTile.class
-/ReversiFactory.class
-/GameModel$Directions.class
-/GameModel$GameUtils.class
-/BlankTile.class
-/GameUtils.class
+/IObservable.class
