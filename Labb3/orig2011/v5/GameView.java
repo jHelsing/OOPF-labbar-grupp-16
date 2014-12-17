@@ -58,10 +58,34 @@ public class GameView extends JComponent implements PropertyChangeListener {
 	 * Updates the view with a new model.
 	 */
 	public void setModel(final GameModel model) {
+		if(this.model != null) {
+			this.model.removeObserver(this);
+		}
 		this.model = model;
 		if(this.model != null) {
 			this.model.addObserver(this);
 		}
+	}
+	
+	/**
+	 * This method ensures that the painting is performed double-buffered. This
+	 * means there won't be any flicker when repainting all the time.
+	 */
+	@Override
+	public void update(final Graphics g) {
+		// Create an offscreen buffer (if we don't have one)
+		if (this.offscreenImage == null) {
+			Dimension size = getSize();
+
+			this.offscreenImage = createImage(size.width, size.height);
+			this.offscreenGraphics = this.offscreenImage.getGraphics();
+		}
+
+		// This will invoke painting correctly on the offscreen buffer
+		super.update(this.offscreenGraphics);
+
+		// Draw the contents of the offscreen buffer to screen.
+		g.drawImage(this.offscreenImage, 0, 0, this);
 	}
 
 	/**
