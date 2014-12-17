@@ -1,4 +1,4 @@
-package orig2011.v4;
+package orig2011.v5;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -65,27 +65,6 @@ public class GameView extends JComponent implements PropertyChangeListener {
 	}
 
 	/**
-	 * This method ensures that the painting is performed double-buffered. This
-	 * means there won't be any flicker when repainting all the time.
-	 */
-	@Override
-	public void update(final Graphics g) {
-		// Create an offscreen buffer (if we don't have one)
-		if (this.offscreenImage == null) {
-			Dimension size = getSize();
-
-			this.offscreenImage = createImage(size.width, size.height);
-			this.offscreenGraphics = this.offscreenImage.getGraphics();
-		}
-
-		// This will invoke painting correctly on the offscreen buffer
-		super.update(this.offscreenGraphics);
-
-		// Draw the contents of the offscreen buffer to screen.
-		g.drawImage(this.offscreenImage, 0, 0, this);
-	}
-
-	/**
 	 * Consults the model to paint the game matrix. If model is null, draws a
 	 * default text.
 	 */
@@ -118,6 +97,5 @@ public class GameView extends JComponent implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		repaint();
-		System.out.println("Hej");
 	}
 }
