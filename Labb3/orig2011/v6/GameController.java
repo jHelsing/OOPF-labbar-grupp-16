@@ -6,8 +6,6 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.sun.org.apache.xalan.internal.utils.SecuritySupport;
-
 /**
  * The controller class of the framework. Listens to user keystrokes and
  * passes them on to the current game.
@@ -68,11 +66,12 @@ public class GameController implements Runnable {
 	 * Add a key press to the end of the queue
 	 */
 	private synchronized void enqueueKeyPress(final int key) {
-		if(this.gameModel.getUpdateSpeed() <=0) {
+		if(this.gameModel.getUpdateSpeed() <= 0) {
 			try {
 				this.gameModel.gameUpdate(Integer.valueOf(key));
 			} catch (GameOverException e) {
-				System.out.println("Fel vid uppdatering av knapptryckningar");
+				this.isRunning = false;
+				System.out.println("Game over: " + e.getScore());
 			}
 		} else {
 			this.keypresses.add(Integer.valueOf(key));
@@ -158,8 +157,12 @@ public class GameController implements Runnable {
 				this.gameModel.gameUpdate(nextKeyPress());
 
 				this.view.repaint();
-
-				Thread.sleep(this.gameModel.getUpdateSpeed());
+				
+				if(this.gameModel.getUpdateSpeed() <= 0) {
+					Thread.sleep(Integer.MAX_VALUE);
+				} else {
+					Thread.sleep(this.gameModel.getUpdateSpeed());
+				}
 			} catch (GameOverException e) {
 				// we got a game over signal, time to exit...
 				// The current implementation ignores the game score

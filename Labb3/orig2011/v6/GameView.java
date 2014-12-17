@@ -7,8 +7,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
 import javax.swing.JComponent;
 
 /**
@@ -121,5 +119,6 @@ public class GameView extends JComponent implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		repaint();
+		System.out.println("Hej");
 	}
 }
