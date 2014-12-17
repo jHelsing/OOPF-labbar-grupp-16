@@ -89,6 +89,8 @@ public class ReversiModel implements GameModel {
 	private final Dimension gameboardSize = Constants.getGameSize();
 	
 	private PropertyChangeSupport listener;
+	
+	private final int updateSpeed = 0;
 
 	public ReversiModel() {
 		this.width = Constants.getGameSize().width;
@@ -330,7 +332,6 @@ public class ReversiModel implements GameModel {
 							Math.min(nextCursorPos.getY(), boardSize.height - 1));
 			nextCursorPos = new Position(nextX, nextY);
 			this.cursorPos = nextCursorPos;
-			//TODO Lagt till
 			this.listener.firePropertyChange("gameUpdate", null, null);
 		} else {
 			throw new GameOverException(this.blackScore - this.whiteScore);
@@ -389,8 +390,7 @@ public class ReversiModel implements GameModel {
 
 	@Override
 	public int getUpdateSpeed() {
-		// TODO getUpdateSpeed Reversi
-		return 0;
+		return this.updateSpeed;
 	}
 
 }

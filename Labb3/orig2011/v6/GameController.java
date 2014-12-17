@@ -72,8 +72,7 @@ public class GameController implements Runnable {
 			try {
 				this.gameModel.gameUpdate(Integer.valueOf(key));
 			} catch (GameOverException e) {
-				System.out.println("Ojda");
-				// TODO Auto-generated catch block
+				System.out.println("Fel vid uppdatering av knapptryckningar");
 			}
 		} else {
 			this.keypresses.add(Integer.valueOf(key));
