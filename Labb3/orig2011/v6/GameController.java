@@ -134,6 +134,7 @@ public class GameController implements Runnable {
 		
 		// Make sure we wait until the thread has stopped...
 		if (this.gameThread != null) {
+			this.stopThread();
 			while (this.gameThread.isAlive()) {
 				try {
 					Thread.sleep(100);
@@ -159,7 +160,7 @@ public class GameController implements Runnable {
 				this.view.repaint();
 				
 				if(this.gameModel.getUpdateSpeed() <= 0) {
-					Thread.sleep(1000);
+					Thread.sleep(Integer.MAX_VALUE);
 				} else {
 					Thread.sleep(this.gameModel.getUpdateSpeed());
 				}
@@ -172,6 +173,12 @@ public class GameController implements Runnable {
 				// if we get this exception, we're asked to terminate ourselves
 				this.isRunning = false;
 			}
+		}
+	}
+	
+	public void stopThread() {
+		if(this.gameThread != null) {
+			this.gameThread.interrupt();
 		}
 	}
 }
