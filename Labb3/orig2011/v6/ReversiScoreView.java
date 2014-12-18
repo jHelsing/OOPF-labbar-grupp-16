@@ -7,7 +7,6 @@ public class ReversiScoreView implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("sadsa");
 		if((evt.getSource()) instanceof ReversiModel) {
 			ReversiModel temp =  (ReversiModel) evt.getSource();
 			int blackscore = temp.getBlackScore();
