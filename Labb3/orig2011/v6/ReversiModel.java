@@ -88,8 +88,13 @@ public class ReversiModel implements GameModel {
 	private boolean gameOver;
 	private final Dimension gameboardSize = Constants.getGameSize();
 	
+	/** 
+	 * The listener that will fire a propertyChange action
+	 * when update of the GameView is requierd.
+	 */
 	private PropertyChangeSupport listener;
 	
+	/** The update speed of the game */
 	private final int updateSpeed = 0;
 
 	public ReversiModel() {
@@ -336,12 +341,17 @@ public class ReversiModel implements GameModel {
 			throw new GameOverException(this.blackScore - this.whiteScore);
 		}
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public GameTile getGameboardState(Position pos) {
 		return getGameboardState(pos.getX(), pos.getY());
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public GameTile getGameboardState(int x, int y) {
 		GameTile returnTile = null;
@@ -373,20 +383,33 @@ public class ReversiModel implements GameModel {
 		return blankTile;
 		
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public Dimension getGameboardSize() {
 		return this.gameboardSize;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void addObserver(PropertyChangeListener observer) {
 		listener.addPropertyChangeListener(observer);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void removeObserver(PropertyChangeListener observer) {
 		listener.removePropertyChangeListener(observer);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getUpdateSpeed() {
 		return this.updateSpeed;

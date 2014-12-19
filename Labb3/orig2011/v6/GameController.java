@@ -67,6 +67,7 @@ public class GameController implements Runnable {
 	 */
 	private synchronized void enqueueKeyPress(final int key) {
 		if(this.gameModel.getUpdateSpeed() <= 0) {
+			//If the gameUpdate should be run after every keystroke
 			try {
 				this.gameModel.gameUpdate(Integer.valueOf(key));
 			} catch (GameOverException e) {
@@ -74,6 +75,7 @@ public class GameController implements Runnable {
 				System.out.println("Game over: " + e.getScore());
 			}
 		} else {
+			//If the gameUpdate should be run after a certain timer
 			this.keypresses.add(Integer.valueOf(key));
 		}
 	}
@@ -134,6 +136,7 @@ public class GameController implements Runnable {
 		
 		// Make sure we wait until the thread has stopped...
 		if (this.gameThread != null) {
+			//Force stop the thread if it's asleep
 			this.stopThread();
 			while (this.gameThread.isAlive()) {
 				try {
@@ -160,8 +163,11 @@ public class GameController implements Runnable {
 				this.view.repaint();
 				
 				if(this.gameModel.getUpdateSpeed() <= 0) {
+					//Put's the thread asleep until
+					//the next keypress comes
 					Thread.sleep(Integer.MAX_VALUE);
 				} else {
+					//Puts thread to sleep until the timer comes
 					Thread.sleep(this.gameModel.getUpdateSpeed());
 				}
 			} catch (GameOverException e) {
@@ -175,7 +181,9 @@ public class GameController implements Runnable {
 			}
 		}
 	}
-	
+	/**
+	 * Forces the Thread to stop.
+	 */
 	public void stopThread() {
 		if(this.gameThread != null) {
 			this.gameThread.interrupt();

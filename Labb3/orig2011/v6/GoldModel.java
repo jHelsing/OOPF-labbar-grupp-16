@@ -89,8 +89,13 @@ public class GoldModel implements GameModel {
 	private final GameTile[][] gameboardState;
 	private final Dimension gameboardSize = Constants.getGameSize();
 	
+	/** 
+	 * The listener that will fire a propertyChange action
+	 * when update of the GameView is required.
+	 */
 	private PropertyChangeSupport listener;
 	
+	/** The update speed of the game */
 	private final int updateSpeed = 150;
 
 	/**
@@ -230,30 +235,61 @@ public class GoldModel implements GameModel {
 		return pos.getX() < 0 || pos.getX() >= getGameboardSize().width
 				|| pos.getY() < 0 || pos.getY() >= getGameboardSize().height;
 	}
-
+	
+	/**
+	 * Getter for the game board state at the given position.
+	 * @param pos The position to get the state at.
+	 * @return The state at the given position.
+	 */
 	@Override
 	public GameTile getGameboardState(Position pos) {
 		return this.getGameboardState(pos.getX(), pos.getY());
 	}
-
+	
+	/**
+	 * Getter for the game board state at the given position.
+	 * @param x The X-coordinate of the game board.
+	 * @param y The Y-coordinate of the game board.
+	 * @return The state of the game board at 
+	 * the given x- and y-coordinate.
+	 */
 	@Override
 	public GameTile getGameboardState(int x, int y) {
 		return this.gameboardState[x][y];
 	}
+	
+	/**
+	 * Getter for the size of the game board.
+	 * @return Returns the size of the game board.
+	 */
 	public Dimension getGameboardSize() {
 		return this.gameboardSize; 
 	}
-
+	
+	/**
+	 * Adds a observer that will listen after when it's
+	 * time to update the GameView.
+	 * @param observer The observer that will listen.
+	 */
 	@Override
 	public void addObserver(PropertyChangeListener observer) {
 		this.listener.addPropertyChangeListener(observer);
 	}
-
+	
+	/**
+	 * Removes a observer that would listen after when
+	 * it's time to update the GameView.
+	 * @param observer The observer to remove.
+	 */
 	@Override
 	public void removeObserver(PropertyChangeListener observer) {
 		this.listener.removePropertyChangeListener(observer);
 	}
-
+	
+	/**
+	 * A getter for the update speed of the game.
+	 * @returns the update speed of the game.
+	 */
 	@Override
 	public int getUpdateSpeed() {
 		return this.updateSpeed;

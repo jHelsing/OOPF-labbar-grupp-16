@@ -115,7 +115,10 @@ public class GameView extends JComponent implements PropertyChangeListener {
 			g.drawChars(message, 0, message.length, 50, 50);
 		}
 	}
-
+	
+	/**
+	 * Repaint's the GameView when a Observer notice a firePropertyChange.
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		repaint();

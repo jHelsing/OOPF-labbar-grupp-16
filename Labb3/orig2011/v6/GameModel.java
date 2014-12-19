@@ -27,6 +27,12 @@ public interface GameModel extends IObservable {
 	 */
 	public void gameUpdate(int lastKey) throws GameOverException;
 	
+	/**
+	 * Returns the GameModel's time in milliseconds that is
+	 * between gameUpdates.
+	 *  
+	 * @return The update speed in milliseconds
+	 */
 	public int getUpdateSpeed();
 	
 }
