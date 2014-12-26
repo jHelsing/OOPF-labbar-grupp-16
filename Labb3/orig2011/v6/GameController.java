@@ -159,8 +159,6 @@ public class GameController implements Runnable {
 				// Tell model to update, send next key press.
 				// or 0 if no new keypress since last update.
 				this.gameModel.gameUpdate(nextKeyPress());
-
-				this.view.repaint();
 				
 				if(this.gameModel.getUpdateSpeed() <= 0) {
 					//Put's the thread asleep until
